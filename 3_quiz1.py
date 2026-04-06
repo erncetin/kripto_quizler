@@ -1,8 +1,11 @@
 # her kareye 1 bit koy
 # ilk şekil 24 bit, ikinci 21 bit
 from aes_deneme import encrypt, decrypt, Mode
+import matplotlib.pyplot as plt
+import numpy as np
 
-
+# https://github.com/rafael2903/AES-128-cipher
+# İLK İNPUT AESLENECEK VERİ, İKİNCİ İNPUY ŞEKİL. 1 VE 2 OLACAK ŞEKİLDE
 def mod_alma(algoritma_sonuc, sekil):
     counter = 0
     temp_list = []
@@ -44,6 +47,7 @@ def toBinary(a):
 
 text = input()
 plain_text = text.encode("utf-8")
+sekil = int(input())
 
 
 key = bytes.fromhex("2b7e151628aed2a6abf7158809cf4f3c")
@@ -66,12 +70,45 @@ binary_repr = int(bin(int(cipher_text.hex(), scale))[2:].zfill(num_of_bits))
 
 res = list(map(int, str(binary_repr)))
 
-print(mod_alma(res, 1))
-print(mod_alma(res, 2))
+mylist = mod_alma(res, sekil)
+
+print(mylist)
+
+if sekil == 1:
+    sekilldolu = [
+        [0,1], [0,3], 
+        [1,1], [1,3],
+        [2,1], [2,2], [2,3],
+        [3,2],
+        [4,1], [4,2], [4,3], [4,4],
+        [5,2],
+        [6,0],[6,1],[6,2],[6,3],
+        [7,2],
+        [8,0],[8,1],[8,2],[8,3],[8,4],[8,5]
+
+    ]
+else:
+    sekilldolu = [
+        [0,0], [0,1],[0,2],[0,7],[0,8],[0,9], 
+        [1,2], [1,3],[1,4],[1,5],[1,6],[1,7],
+        [2,2],[2,7],
+        [3,1], [3,2],[3,3], [3,5],[3,6],[3,7],[3,8]
+
+    ]
+
+if sekil == 1:
+    array = np.zeros([9,6])
+else:
+    array = np.zeros([4,10])
 
 
+c = 0
+for i in sekilldolu:
+    if mylist[c] == 1:
+        array[i[0], i[1]] = 10
+    else:
+        array[i[0], i[1]]= 3
+    c +=1
 
-
-
-
-
+plt.matshow(array)
+plt.show()
