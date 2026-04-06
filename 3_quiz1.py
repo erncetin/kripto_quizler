@@ -1,8 +1,6 @@
 # her kareye 1 bit koy
 # ilk şekil 24 bit, ikinci 21 bit
 from aes_deneme import encrypt, decrypt, Mode
-a = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1]
-
 
 
 def mod_alma(algoritma_sonuc, sekil):
@@ -10,7 +8,7 @@ def mod_alma(algoritma_sonuc, sekil):
     temp_list = []
     if sekil == 1:
         # range kısmını değiştir
-        for i in range(28):
+        for i in range(128):
             counter = i % 24
             #print(f"Temp_list = {temp_list}")
             #print(f"i = {i}, counter = {counter}")
@@ -22,11 +20,11 @@ def mod_alma(algoritma_sonuc, sekil):
     
     elif sekil == 2:
         # range kısmını değiştir
-        for i in range(26):
+        for i in range(128):
             counter = i % 21
-            print(f"Temp_list = {temp_list}")
-            print(f"i = {i}, counter = {counter}")
-            if i < 24:
+            #print(f"Temp_list = {temp_list}")
+            #print(f"i = {i}, counter = {counter}")
+            if i < 21:
                 temp_list.append(algoritma_sonuc[i])
             else:
                 temp_list[counter] ^= algoritma_sonuc[i]
@@ -43,12 +41,6 @@ def toBinary(a):
   for i in l:
     m.append(int(bin(i)[2:]))
   return m
-
-
-
-mylist = mod_alma(a, 1)
-
-print(mylist)
 
 
 
@@ -77,6 +69,7 @@ binary_repr = int(bin(int(cipher_text.hex(), scale))[2:].zfill(num_of_bits))
 res = list(map(int, str(binary_repr)))
 
 print(mod_alma(res, 1))
+print(mod_alma(res, 2))
 
 
 
