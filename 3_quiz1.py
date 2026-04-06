@@ -29,8 +29,6 @@ def mod_alma(algoritma_sonuc, sekil):
             else:
                 temp_list[counter] ^= algoritma_sonuc[i]
 
-        pass
-
 
     return temp_list
 
@@ -44,8 +42,8 @@ def toBinary(a):
 
 
 
-
-plain_text = b"plain text"
+text = input()
+plain_text = text.encode("utf-8")
 
 
 key = bytes.fromhex("2b7e151628aed2a6abf7158809cf4f3c")
