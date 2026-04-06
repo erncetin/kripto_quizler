@@ -12,8 +12,8 @@ def mod_alma(algoritma_sonuc, sekil):
         # range kısmını değiştir
         for i in range(28):
             counter = i % 24
-            print(f"Temp_list = {temp_list}")
-            print(f"i = {i}, counter = {counter}")
+            #print(f"Temp_list = {temp_list}")
+            #print(f"i = {i}, counter = {counter}")
             if i < 24:
                 temp_list.append(algoritma_sonuc[i])
             else:
@@ -36,7 +36,13 @@ def mod_alma(algoritma_sonuc, sekil):
 
     return temp_list
 
-
+def toBinary(a):
+  l,m=[],[]
+  for i in a:
+    l.append(ord(i))
+  for i in l:
+    m.append(int(bin(i)[2:]))
+  return m
 
 
 
@@ -48,6 +54,8 @@ print(mylist)
 
 
 plain_text = b"plain text"
+
+
 key = bytes.fromhex("2b7e151628aed2a6abf7158809cf4f3c")
 iv = bytes.fromhex("00112233445566778899aabbccddeeff")
 
@@ -57,8 +65,22 @@ cipher_text = encrypt(plain_text, key, Mode.CTR, iv)
 # Decoding
 plain_text = decrypt(cipher_text, key, Mode.CTR, iv)
 
-print(cipher_text)
-print(plain_text)
 
 
-print(plain_text.hex())
+
+scale = 16 ## equals to hexadecimal
+
+num_of_bits = 8
+
+binary_repr = int(bin(int(cipher_text.hex(), scale))[2:].zfill(num_of_bits))
+
+res = list(map(int, str(binary_repr)))
+
+print(mod_alma(res, 1))
+
+
+
+
+
+
+
